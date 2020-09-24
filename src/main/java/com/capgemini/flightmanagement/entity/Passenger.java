@@ -1,8 +1,5 @@
 package com.capgemini.flightmanagement.entity;
 
-import java.math.BigInteger;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,62 +9,52 @@ import javax.persistence.ManyToOne;
 public class Passenger {
 	
 	@Id
-	private BigInteger passengerUIN;
-	private BigInteger pnrNumber;
-	private String passengerName;
-	private Integer passengerAge;
+	private Integer passengerId;
+	
+	private String name;
+	private Integer age;
 	private Double luggage;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "booking_id")
-	private Booking booking;
+	private BookingDetails bookingDetails;
 
 	public Passenger() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Passenger(BigInteger passengerUIN, BigInteger pnrNumber, String passengerName, Integer passengerAge,
-			Double luggage, Booking booking) {
+	public Passenger(Integer passengerId, String name, Integer age, Double luggage, BookingDetails bookingDetails) {
 		super();
-		this.passengerUIN = passengerUIN;
-		this.pnrNumber = pnrNumber;
-		this.passengerName = passengerName;
-		this.passengerAge = passengerAge;
+		this.passengerId = passengerId;
+		this.name = name;
+		this.age = age;
 		this.luggage = luggage;
-		this.booking = booking;
+		this.bookingDetails = bookingDetails;
 	}
 
-	public BigInteger getPassengerUIN() {
-		return passengerUIN;
+	public Integer getPassengerId() {
+		return passengerId;
 	}
 
-	public void setPassengerUIN(BigInteger passengerUIN) {
-		this.passengerUIN = passengerUIN;
+	public void setPassengerId(Integer passengerId) {
+		this.passengerId = passengerId;
 	}
 
-	public BigInteger getPnrNumber() {
-		return pnrNumber;
+	public String getName() {
+		return name;
 	}
 
-	public void setPnrNumber(BigInteger pnrNumber) {
-		this.pnrNumber = pnrNumber;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getPassengerName() {
-		return passengerName;
+	public Integer getAge() {
+		return age;
 	}
 
-	public void setPassengerName(String passengerName) {
-		this.passengerName = passengerName;
-	}
-
-	public Integer getPassengerAge() {
-		return passengerAge;
-	}
-
-	public void setPassengerAge(Integer passengerAge) {
-		this.passengerAge = passengerAge;
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	public Double getLuggage() {
@@ -78,12 +65,14 @@ public class Passenger {
 		this.luggage = luggage;
 	}
 
-	public Booking getBooking() {
-		return booking;
+	public BookingDetails getBookingDetails() {
+		return bookingDetails;
 	}
 
-	public void setBooking(Booking booking) {
-		this.booking = booking;
+	public void setBookingDetails(BookingDetails bookingDetails) {
+		this.bookingDetails = bookingDetails;
 	}
 	
+	
+
 }

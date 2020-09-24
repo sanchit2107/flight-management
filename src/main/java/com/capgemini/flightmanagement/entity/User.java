@@ -1,9 +1,9 @@
 package com.capgemini.flightmanagement.entity;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -12,37 +12,35 @@ import javax.persistence.OneToMany;
 public class User {
 	
 	@Id
-	private BigInteger id;
+	private Integer userId;
 	private String userName;
 	private String password;
-	private BigInteger phone;
+	private Long phone;
 	private String email;
 	
-	@OneToMany(mappedBy = "user")
-	private List<Booking> bookings = new ArrayList<Booking>();
-
-	public User(BigInteger id, String userName, String password, BigInteger phone, String email,
-			List<Booking> bookings) {
-		super();
-		this.id = id;
-		this.userName = userName;
-		this.password = password;
-		this.phone = phone;
-		this.email = email;
-		this.bookings = bookings;
-	}
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	private List<BookingDetails> bookingDetails = new ArrayList<BookingDetails>();
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public BigInteger getId() {
-		return id;
+	public User(Integer userId, String userName, String password, Long phone, String email) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.phone = phone;
+		this.email = email;
 	}
 
-	public void setId(BigInteger id) {
-		this.id = id;
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getUserName() {
@@ -61,11 +59,11 @@ public class User {
 		this.password = password;
 	}
 
-	public BigInteger getPhone() {
+	public Long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(BigInteger phone) {
+	public void setPhone(Long phone) {
 		this.phone = phone;
 	}
 
@@ -77,13 +75,13 @@ public class User {
 		this.email = email;
 	}
 
-	public List<Booking> getBookings() {
-		return bookings;
+	public List<BookingDetails> getBookingDetails() {
+		return bookingDetails;
 	}
 
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
+	public void setBookingDetails(List<BookingDetails> bookingDetails) {
+		this.bookingDetails = bookingDetails;
 	}
 	
-	
+
 }
