@@ -1,4 +1,4 @@
-package com.capgemini.flightmanagement.userException;
+package com.capgemini.flightmanagement.exception;
 
 public class NullUserException extends RuntimeException {
 
