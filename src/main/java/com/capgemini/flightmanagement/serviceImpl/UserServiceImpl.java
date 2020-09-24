@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.flightmanagement.dao.UserDao;
 import com.capgemini.flightmanagement.entity.User;
+import com.capgemini.flightmanagement.exception.NullUserException;
+import com.capgemini.flightmanagement.exception.UserAlreadyExistException;
+import com.capgemini.flightmanagement.exception.UserDoesnotExistException;
 import com.capgemini.flightmanagement.service.UserService;
-import com.capgemini.flightmanagement.userException.NullUserException;
-import com.capgemini.flightmanagement.userException.UserAlreadyExistException;
-import com.capgemini.flightmanagement.userException.UserDoesnotExistException;
 
 @Service
 public class UserServiceImpl implements UserService {
