@@ -47,10 +47,11 @@ public class UserServiceImpl implements UserService {
 	public User getUser(Integer userId) {
 		if (userId == null)
 			throw new NullUserException("No data recieved");
-		User user = dao.getOne(userId);
-		if (user == null)
+		Optional<User> user = dao.findById(userId);
+//		User user = dao.getOne(userId);
+		if (!user.isPresent())
 			throw new UserDoesnotExistException("User not found");
-		return user;
+		return user.get();
 	}
 
 	@Override

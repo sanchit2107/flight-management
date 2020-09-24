@@ -33,6 +33,7 @@ public class UserController {
 	
 	@GetMapping("/getUser/{id}")
 	public ResponseEntity<User> get(@PathVariable Integer id){
+		System.out.println(id);
 		User user = service.getUser(id);
 		return ResponseEntity.ok(user);
 	}
