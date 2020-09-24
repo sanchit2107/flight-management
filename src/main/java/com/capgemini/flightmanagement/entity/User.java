@@ -9,14 +9,24 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+
 @Entity
+//@Table(name = "user",schema = "hr")
 public class User {
 	
 	@Id
 	private Integer userId;
+	@NotNull(message = "username cannot be null")
 	private String userName;
+	@NotNull(message = "password cannot be null")
+	@Min(value = 8,message = "password cannot be smaller than 8 characters")
 	private String password;
+	@NotNull(message = "phone cannot be null")
 	private Long phone;
+	@NotNull(message = "email cannot be null")
 	private String email;
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
