@@ -1,13 +1,21 @@
 /**
  * 
  */
-package com.capgemini.flightmanagement.exceptions;
+package com.capgemini.flightmanagement.exception;
 
 /**
  * @author Sanchit Singhal
  *
  */
 public class FlightDetailsAlreadyPresentException extends RuntimeException {
+
+	/**
+	 * @param message
+	 * @param cause
+	 */
+	public FlightDetailsAlreadyPresentException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
 	/**
 	 * @param message
