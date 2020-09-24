@@ -2,8 +2,10 @@ package com.capgemini.flightmanagement.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+//@Table(name = "admin",schema = "hr")
 public class Admin {
 
 	@Id

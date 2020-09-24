@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+//@Table(name = "flight",schema = "hr")
 public class FlightDetails {
 
 	@Id
