@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*
+ *  change the schema attribute according to your schema
+ */
+
 @Entity
 @Table(name = "flight_details",schema = "hr")
 public class FlightDetails {

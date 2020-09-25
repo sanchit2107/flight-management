@@ -13,6 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/*
+ *  change the schema attribute according to your schema
+ */
+
 @Entity
 @Table(name = "booking_details",schema = "hr")
 public class BookingDetails {
