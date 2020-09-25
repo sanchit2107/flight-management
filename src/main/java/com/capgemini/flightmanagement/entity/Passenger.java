@@ -6,8 +6,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/*
+ *  change the schema attribute according to your schema
+ */
+
 @Entity
-//@Table(name = "passenger",schema = "hr")
+@Table(name = "passengers",schema = "hr")
 public class Passenger {
 	
 	@Id

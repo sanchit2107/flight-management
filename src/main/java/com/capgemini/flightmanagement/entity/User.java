@@ -13,8 +13,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 
+/*
+ *  change the schema attribute according to your schema
+ */
+
 @Entity
-//@Table(name = "user",schema = "hr")
+@Table(name = "users",schema = "hr")
 public class User {
 	
 	@Id
