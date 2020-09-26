@@ -22,9 +22,9 @@ public class FlightDetails {
 	@NotNull(message = "Source Airport cannot be null")
 	private String arrivalAirport;
 	private Integer availableSeats;
-	@NotNull(message = "Arival Time cannot be null")
+//	@NotNull(message = "Arival Time cannot be null")
 	private LocalDateTime arrivalTime;
-	@NotNull(message = "Departure Time cannot be null")
+//	@NotNull(message = "Departure Time cannot be null")
 	private LocalDateTime departureTime;
 	@NotNull(message = "Flight Vendor cannot be null")
 	private String flightVendor;

@@ -29,19 +29,18 @@ public class UserController {
 	private UserServiceImpl service;
 
 	@PostMapping("/addUser")
-	public ResponseEntity<String> add(@Valid @RequestBody User user, Errors error) {
+	public ResponseEntity<User> add(@Valid @RequestBody User user, Errors error) {
 		if (error.hasErrors()) {
 			throw new UserValidationException("invalid data provided");
 		}
 
-		String token = service.addUser(user);
-		return ResponseEntity.ok(token);
+		return service.addUser(user);
 	}
-	
+
 	@PostMapping("/userLogin")
-	public ResponseEntity<String> login(@RequestBody UserAuth auth) {
-		String token = service.userLogin(auth);
-		return ResponseEntity.ok(token);
+	public ResponseEntity<User> login(@RequestBody UserAuth auth) {
+		return  service.userLogin(auth);
+		
 	}
 
 	@GetMapping("/getUser/{id}")

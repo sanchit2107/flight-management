@@ -40,7 +40,7 @@ public class BookingRestController {
 	
     private static final Logger Log = LoggerFactory.getLogger(BookingRestController.class);
 
-	@PostMapping("/create/{user_id}/{flight_id}")
+	@PostMapping("/create/{userId}/{flightId}")
 	public void addBooking(@RequestBody BookingDetails newBooking, @PathVariable Integer userId,@PathVariable Integer flightId) {
 	     //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	     //LocalDate bookingDate = LocalDate.parse(BookingDetails.getBookingDate(), formatter);

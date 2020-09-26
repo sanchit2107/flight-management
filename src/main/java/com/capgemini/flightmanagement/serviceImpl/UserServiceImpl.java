@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.flightmanagement.dao.UserDao;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	UserJwtUtil jwt;
 
 	@Override
-	public String addUser(User user) {
+	public ResponseEntity<User> addUser(User user) {
 
 		if (user == null)
 			throw new NullUserException("No data recieved");
@@ -33,11 +34,17 @@ public class UserServiceImpl implements UserService {
 		if (checkUser.isPresent())
 			throw new UserAlreadyExistException("user already exists");
 		else {
+			
+			Integer userId = (int) ((Math.random() * 900) + 100);
+			user.setUserId(userId);
 			dao.save(user);
 			UserAuth auth = new UserAuth(user.getUserId(), user.getPassword());
 			String token = jwt.generateToken(auth);
+			
+			ResponseEntity<User> response = ResponseEntity.ok().header("token", token).body(user);
+			
 			System.out.println("user Added");
-			return token;
+			return response;
 		}
 	}
 
@@ -80,13 +87,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String userLogin(UserAuth auth) {
+	public ResponseEntity<User> userLogin(UserAuth auth) {
 		if(auth == null) {
 			throw new NullUserException("No data recieved");
 		}
 		Optional<User> user = dao.findById(auth.getUserId());
 		if (user.isPresent()) {
-			return jwt.generateToken(auth);
+			String token =  jwt.generateToken(auth);
+			
+			ResponseEntity<User> response = ResponseEntity.ok().header("token", token).body(user.get());
+			return response;
 		}
 		else {
 			throw new UserDoesnotExistException("User not found");

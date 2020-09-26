@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
  */
 
 @Entity
-@Table(name = "users",schema = "system")
+@Table(name = "users",schema = "hr")
 public class User {
 	
 	@Id

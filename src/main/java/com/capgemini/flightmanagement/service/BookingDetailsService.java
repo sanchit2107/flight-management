@@ -17,5 +17,4 @@ public interface BookingDetailsService {
 	
 	public ResponseEntity<?> findBookingByUserId(Integer userId);
 	
-	
 }
