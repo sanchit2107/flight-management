@@ -1,6 +1,7 @@
 package com.capgemini.flightmanagement.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,10 +12,11 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "passengers",schema = "hr")
+@Table(name = "passengers",schema = "system")
 public class Passenger {
 	
 	@Id
+	@GeneratedValue
 	private Integer passengerId;
 	
 	private String name;
