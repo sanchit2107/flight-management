@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import lombok.val;
+
 @ControllerAdvice
 public class UserExceptionHandler {
 
@@ -22,4 +24,12 @@ public class UserExceptionHandler {
 	public ResponseEntity<ExceptionObject> handleUserDoesnotExistException(UserDoesnotExistException e){
 		return new ResponseEntity<ExceptionObject>(new ExceptionObject(e.getMessage(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(value = {UserValidationException.class})
+	public ResponseEntity<ExceptionObject> handleValidationException(UserValidationException e){
+		return new ResponseEntity<ExceptionObject>(new ExceptionObject(e.getMessage(), HttpStatus.BAD_REQUEST),HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	
 }

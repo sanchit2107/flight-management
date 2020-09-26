@@ -14,6 +14,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 
 /*
  *  change the schema attribute according to your schema
@@ -68,10 +72,12 @@ public class User {
 		this.userName = userName;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
-
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	public void setPassword(String password) {
 		this.password = password;
 	}
