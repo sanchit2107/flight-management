@@ -27,6 +27,8 @@ public class AdminServiceImpl implements AdminService {
 	public String addAdmin(Admin admin) {
 		if (admin == null)
 			throw new NullAdminException("no data provided");
+		Integer adminId = (int) ((Math.random() * 900) + 100);
+		admin.setAdminId(adminId);
 		Optional<Admin> checkAdmin = dao.findById(admin.getAdminId());
 		if (checkAdmin.isPresent()) {
 			throw new AdminAlreadyExistException("admin already exist exception");

@@ -36,11 +36,14 @@ public class FlightDetailsServiceImpl implements FlightDetailsService {
 		
 		if (flight == null)
 			throw new NullFlightDetailsException("No data recieved");
-		Optional<FlightDetails> findByFlightNumber = flightDao.findById(flight.getFlightNumber());
+		Optional<FlightDetails> findByFlightNumber = flightDao.findById(flight.getFlightNumber());		
 		if (findByFlightNumber.isPresent())
 			throw new FlightDetailsAlreadyPresentException("Flight Details already exists..");
-		else
+		else {
+			int flightId = (int) ((Math.random() * 9000) + 1000);
+			flight.setFlightNumber(flightId);
 			flightDao.save(flight);
+		}
 		System.out.println("Flight Details Added..");
 		
 	}
