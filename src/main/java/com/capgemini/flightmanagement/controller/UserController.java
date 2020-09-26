@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.flightmanagement.entity.User;
 import com.capgemini.flightmanagement.serviceImpl.UserServiceImpl;
-import com.capgemini.flightmanagement.userException.ExceptionObject;
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
