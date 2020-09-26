@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.flightmanagement.entity.User;
 import com.capgemini.flightmanagement.serviceImpl.UserServiceImpl;
+import com.capgemini.flightmanagement.userException.ExceptionObject;
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -26,7 +28,9 @@ public class UserController {
 	private UserServiceImpl service;
 	
 	@PostMapping("/addUser")
-	public ResponseEntity<Void> add(@Valid @RequestBody User user)  {
+	public ResponseEntity<Void> add(@Valid @RequestBody User user,Errors error)  {
+		
+		
 		service.addUser(user);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
