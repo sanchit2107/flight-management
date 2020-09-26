@@ -1,5 +1,6 @@
 package com.capgemini.flightmanagement.serviceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +12,33 @@ import com.capgemini.flightmanagement.exception.NullUserException;
 import com.capgemini.flightmanagement.exception.UserAlreadyExistException;
 import com.capgemini.flightmanagement.exception.UserDoesnotExistException;
 import com.capgemini.flightmanagement.service.UserService;
+import com.capgemini.flightmanagement.utils.UserAuth;
+import com.capgemini.flightmanagement.utils.UserJwtUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDao dao;
+	
+	@Autowired
+	UserJwtUtil jwt;
 
 	@Override
-	public void addUser(User user) {
+	public String addUser(User user) {
 
 		if (user == null)
 			throw new NullUserException("No data recieved");
 		Optional<User> checkUser = dao.findById(user.getUserId());
 		if (checkUser.isPresent())
 			throw new UserAlreadyExistException("user already exists");
-		else
+		else {
 			dao.save(user);
-		System.out.println("user Added");
+			UserAuth auth = new UserAuth(user.getUserId(), user.getPassword());
+			String token = jwt.generateToken(auth);
+			System.out.println("user Added");
+			return token;
+		}
 	}
 
 	@Override
@@ -48,7 +58,6 @@ public class UserServiceImpl implements UserService {
 		if (userId == null)
 			throw new NullUserException("No data recieved");
 		Optional<User> user = dao.findById(userId);
-//		User user = dao.getOne(userId);
 		if (!user.isPresent())
 			throw new UserDoesnotExistException("User not found");
 		return user.get();
@@ -58,11 +67,30 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(Integer userId) {
 		if (userId == null)
 			throw new NullUserException("No data recieved");
-		User user = dao.getOne(userId);
-		if (user == null)
+		Optional<User> user = dao.findById(userId);
+		if (!user.isPresent())
 			throw new UserDoesnotExistException("User not found");
 		dao.deleteById(userId);
+	}
 
+	@Override
+	public List<User> getAllUsers() {
+		
+		return dao.findAll();
+	}
+
+	@Override
+	public String userLogin(UserAuth auth) {
+		if(auth == null) {
+			throw new NullUserException("No data recieved");
+		}
+		Optional<User> user = dao.findById(auth.getUserId());
+		if (user.isPresent()) {
+			return jwt.generateToken(auth);
+		}
+		else {
+			throw new UserDoesnotExistException("User not found");
+		}
 	}
 
 }
