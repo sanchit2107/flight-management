@@ -5,22 +5,28 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /*
  *  change the schema attribute according to your schema
  */
 
 @Entity
-@Table(name = "flight_details",schema = "hr")
+@Table(name = "flight_details", schema = "bootcampuser")
 public class FlightDetails {
 
 	@Id
 	private Integer flightNumber;
+	@NotNull(message = "Departure Airport cannot be null")
 	private String departureAirport;
+	@NotNull(message = "Source Airport cannot be null")
 	private String arrivalAirport;
 	private Integer availableSeats;
+	@NotNull(message = "Arival Time cannot be null")
 	private LocalDateTime arrivalTime;
+	@NotNull(message = "Departure Time cannot be null")
 	private LocalDateTime departureTime;
+	@NotNull(message = "Flight Vendor cannot be null")
 	private String flightVendor;
 	private Double cost;
 

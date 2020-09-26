@@ -6,14 +6,13 @@ package com.capgemini.flightmanagement.serviceImpl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.flightmanagement.dao.FlightDetailsDao;
 import com.capgemini.flightmanagement.entity.FlightDetails;
-import com.capgemini.flightmanagement.exceptions.FlightDetailsAlreadyPresentException;
-import com.capgemini.flightmanagement.exceptions.FlightDetailsNotFoundException;
+import com.capgemini.flightmanagement.exception.FlightDetailsAlreadyPresentException;
+import com.capgemini.flightmanagement.exception.FlightDetailsNotFoundException;
+import com.capgemini.flightmanagement.exception.NullFlightDetailsException;
 import com.capgemini.flightmanagement.service.FlightDetailsService;
 
 /**
@@ -33,22 +32,17 @@ public class FlightDetailsServiceImpl implements FlightDetailsService {
 	 * @see com.capgemini.flightmanagement.service.FlightDetailsService#addFlight(com.capgemini.flightmanagement.entity.FlightDetails)
 	 */
 	@Override
-	public ResponseEntity<?> addFlight(FlightDetails flight) {
+	public void addFlight(FlightDetails flight) {
 		
+		if (flight == null)
+			throw new NullFlightDetailsException("No data recieved");
 		Optional<FlightDetails> findByFlightNumber = flightDao.findById(flight.getFlightNumber());
-		try {
-			if(!findByFlightNumber.isPresent()) {
-				flightDao.save(flight);
-				return new ResponseEntity<FlightDetails>(flight, HttpStatus.OK);
-			}
-			else {
-				throw new FlightDetailsAlreadyPresentException("Flight Details with flightNumber = " 
-						+ flight.getFlightNumber() + " already present!!");
-			}
-		}
-		catch(FlightDetailsNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		if (findByFlightNumber.isPresent())
+			throw new FlightDetailsAlreadyPresentException("Flight Details already exists..");
+		else
+			flightDao.save(flight);
+		System.out.println("Flight Details Added..");
+		
 	}
 
 	
@@ -88,14 +82,15 @@ public class FlightDetailsServiceImpl implements FlightDetailsService {
 	 * @see com.capgemini.flightmanagement.service.FlightDetailsService#modifyFlight(com.capgemini.flightmanagement.entity.FlightDetails)
 	 */
 	@Override
-	public FlightDetails modifyFlight(FlightDetails flight) {
+	public void modifyFlight(FlightDetails flight) {
 		
+		if(flight == null)
+			throw new NullFlightDetailsException("No data recieved..");
 		Optional<FlightDetails> findByFlightNumber = flightDao.findById(flight.getFlightNumber());
 		if (findByFlightNumber.isPresent()) {
 			flightDao.save(flight);
 		} else
-			throw new FlightDetailsNotFoundException("Flight with flightNumber: " + flight.getFlightNumber() + " not exists");
-		return flight;
+			throw new FlightDetailsNotFoundException("Flight with flightNumber: " + flight.getFlightNumber() + " not exists..");
 	}
 	
 
@@ -105,16 +100,14 @@ public class FlightDetailsServiceImpl implements FlightDetailsService {
 	 * @see com.capgemini.flightmanagement.service.FlightDetailsService#removeFlight(java.lang.Integer)
 	 */
 	@Override
-	public String removeFlight(Integer flightNumber) {
+	public void removeFlight(Integer flightNumber) {
 		
-		Optional<FlightDetails> findByFlightNumber = flightDao.findById(flightNumber);
-		if(findByFlightNumber.isPresent()) {
-			flightDao.deleteById(flightNumber);
-			return "Flight with flightNumber " + flightNumber + " deleted!!";
-		}
-		else {
-			throw new FlightDetailsNotFoundException("Flight with flightNumber: " + flightNumber + " not exists");
-		}
+		if(flightNumber == null) 
+			throw new NullFlightDetailsException("No data recieved..");
+		FlightDetails flightObj = flightDao.getOne(flightNumber);
+		if (flightObj == null)
+			throw new FlightDetailsNotFoundException("Flight Details not found");
+		flightDao.deleteById(flightNumber);
 	}
 
 }
