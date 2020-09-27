@@ -64,8 +64,8 @@ public class BookingDetailsServiceImpl implements BookingDetailsService {
 		newBooking.setOwnerId(user.getUserId());
 		FlightDetails flightDetails = flightService.viewFlightByFlightNumber(flightNumber);
 		newBooking.setFlightDetails(flightDetails);
-		Integer bookingId = (int) ((Math.random() * 9000) + 1000);
-		newBooking.setBookingId(bookingId);
+//		Integer bookingId = (int) ((Math.random() * 9000) + 1000);
+//		newBooking.setBookingId(bookingId);
 		List<BookingDetails> bookingList = user.getBookingDetails();
 		bookingList.add(newBooking);
 		user.setBookingDetails(bookingList);
