@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -13,6 +14,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.lang.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class User {
 	
 	@Id
+	@Nullable
 	private Integer userId;
 	@NotNull(message = "username cannot be null")
 	private String userName;
@@ -39,7 +43,8 @@ public class User {
 	@NotBlank(message = "email cannot be null")
 	private String email;
 	
-	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
 	private List<BookingDetails> bookingDetails = new ArrayList<BookingDetails>();
 
 	public User() {
