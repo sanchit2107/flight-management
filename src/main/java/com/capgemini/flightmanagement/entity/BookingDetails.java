@@ -30,9 +30,8 @@ public class BookingDetails {
 	@JoinColumn(name = "flightdetails_id")
 	private FlightDetails flightDetails;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	
+	private Integer ownerId;
 	
 	@OneToMany(mappedBy = "bookingDetails",cascade = CascadeType.ALL)
 	private List<Passenger> passengers = new ArrayList<Passenger>();
@@ -43,13 +42,13 @@ public class BookingDetails {
 	}
 
 	public BookingDetails(Integer bookingId, LocalDateTime bookingTime, Double totalCost, FlightDetails flightDetails,
-			User user) {
+			Integer ownerId) {
 		super();
 		this.bookingId = bookingId;
 		this.bookingTime = bookingTime;
 		this.totalCost = totalCost;
 		this.flightDetails = flightDetails;
-		this.user = user;
+		this.ownerId = ownerId;
 	}
 
 	public Integer getBookingId() {
@@ -84,12 +83,16 @@ public class BookingDetails {
 		this.flightDetails = flightDetails;
 	}
 
-	public User getUser() {
-		return user;
+	
+
+	
+
+	public Integer getOwnerId() {
+		return ownerId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	public List<Passenger> getPassengers() {

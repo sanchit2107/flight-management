@@ -30,7 +30,7 @@ import com.capgemini.flightmanagement.serviceImpl.FlightDetailsServiceImpl;
 @RequestMapping("/flight")
 public class FlightController {
 	
-	@Autowired(required=true)
+	@Autowired
 	FlightDetailsServiceImpl flightService;
 	
 	

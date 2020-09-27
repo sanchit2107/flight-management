@@ -40,8 +40,8 @@ public class FlightDetailsServiceImpl implements FlightDetailsService {
 		if (findByFlightNumber.isPresent())
 			throw new FlightDetailsAlreadyPresentException("Flight Details already exists..");
 		else {
-			int flightId = (int) ((Math.random() * 9000) + 1000);
-			flight.setFlightNumber(flightId);
+//			int flightId = (int) ((Math.random() * 9000) + 1000);
+//			flight.setFlightNumber(flightId);
 			flightDao.save(flight);
 		}
 		System.out.println("Flight Details Added..");

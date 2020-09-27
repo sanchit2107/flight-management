@@ -1,5 +1,7 @@
 package com.capgemini.flightmanagement.service;
 import java.math.BigInteger;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import com.capgemini.flightmanagement.entity.BookingDetails;
 
@@ -9,12 +11,12 @@ public interface BookingDetailsService {
 
 	public BookingDetails updateBooking(BookingDetails newBooking);
 
-	public String deleteBooking(Integer bookingId);
+	public String deleteBooking(Integer bookingId,Integer userId);
 
 	public Iterable<BookingDetails> displayAllBooking();
 
 	public ResponseEntity<?> findBookingById(Integer bookingId);
 	
-	public ResponseEntity<?> findBookingByUserId(Integer userId);
+	public ResponseEntity<List<BookingDetails>> findBookingByUserId(Integer userId);
 	
 }
