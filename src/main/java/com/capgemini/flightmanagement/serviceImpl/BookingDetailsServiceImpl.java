@@ -61,7 +61,7 @@ public class BookingDetailsServiceImpl implements BookingDetailsService {
 //			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //		}
 		User user = userService.getUser(userId);
-		newBooking.setUser(user);
+		newBooking.setOwnerId(user.getUserId());
 		FlightDetails flightDetails = flightService.viewFlightByFlightNumber(flightNumber);
 		newBooking.setFlightDetails(flightDetails);
 		Integer bookingId = (int) ((Math.random() * 9000) + 1000);
@@ -94,10 +94,22 @@ public class BookingDetailsServiceImpl implements BookingDetailsService {
      * else delete the booking if exist in database
 	 */
 	@Override
-	public String deleteBooking(Integer bookingId) {
+	public String deleteBooking(Integer bookingId,Integer userId) {
 		Optional<BookingDetails> findBookingById = bookingDao.findById(bookingId);
 		if (findBookingById.isPresent()) {
-			bookingDao.deleteById(bookingId);
+			
+			User user = userService.getUser(userId);
+			List<BookingDetails> bookingDetails = user.getBookingDetails();
+			BookingDetails deleteBooking = null;
+			for (BookingDetails b : bookingDetails) {
+				if(b.getOwnerId() == userId) {
+					deleteBooking = b;
+					break;
+				}
+			}
+			bookingDetails.remove(deleteBooking);
+			user.setBookingDetails(bookingDetails);
+			userService.updateUser(user);
 			return "Booking Deleted!!";
 		} else
 			throw new RecordNotFoundException("Booking not found for the entered BookingID");
@@ -131,11 +143,13 @@ public class BookingDetailsServiceImpl implements BookingDetailsService {
 	}
 
 	@Override
-	public ResponseEntity<?> findBookingByUserId(Integer userId) {
+	public ResponseEntity<List<BookingDetails>> findBookingByUserId(Integer userId) {
 		User user = userService.getUser(userId);
 		List<BookingDetails> bookingDetails = user.getBookingDetails();
 		return ResponseEntity.ok(bookingDetails);
 	}
+
+	
 }
 
  

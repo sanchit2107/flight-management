@@ -4,6 +4,7 @@ import java.math.BigInteger;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,15 +62,21 @@ public class BookingRestController {
 		bookingService.updateBooking(updateBooking);
 	}
 
-	@GetMapping("/searchBooking/{id}")
+	@GetMapping("/getBookingById/{id}")
 	public ResponseEntity<?> searchBookingByID(@PathVariable("id") Integer bookingId) {
 
 		return bookingService.findBookingById(bookingId);
 	}
 
-	@DeleteMapping("/deleteBooking/{id}")
-	public void deleteBookingByID(@PathVariable("id") Integer bookingId) {
+	@DeleteMapping("/deleteBooking/{userId}/{bookingId}")
+	public void deleteBookingByID(@PathVariable Integer bookingId,@PathVariable Integer userId) {
 
-		bookingService.deleteBooking(bookingId);
+		bookingService.deleteBooking(bookingId,userId);
 	}
+	
+	@GetMapping("/getBookingByUserId/{userId}")
+	public ResponseEntity<List<BookingDetails>> getByUserId(@PathVariable Integer userId){
+		return bookingService.findBookingByUserId(userId);
+	}
+	
 }
