@@ -31,12 +31,12 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class User {
 	
 	@Id
-	@Nullable
+//	@Nullable
 	private Integer userId;
 	@NotNull(message = "username cannot be null")
 	private String userName;
 	@NotNull(message = "password cannot be null")
-	@Size(min = 8,message = "password is less than 8 character")
+//	@Size(min = 8,message = "password is less than 8 character")
 	private String password;
 	@NotNull(message = "phone cannot be null")
 	private Long phone;
