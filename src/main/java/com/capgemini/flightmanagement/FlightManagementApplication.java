@@ -10,15 +10,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.capgemini.flightmanagement.entity.User;
+import com.capgemini.flightmanagement.serviceImpl.FlightDetailsServiceImpl;
 import com.capgemini.flightmanagement.serviceImpl.UserServiceImpl;
 import com.capgemini.flightmanagement.utils.UserAuth;
 import com.capgemini.flightmanagement.utils.UserJwtUtil;
 
 @SpringBootApplication
-public class FlightManagementApplication   {
+public class FlightManagementApplication {
 	
 	@Autowired
-	UserJwtUtil jwt;
+	FlightDetailsServiceImpl ser;
 	
 //	@PostConstruct
 //	public void initUsers() {
@@ -34,10 +35,10 @@ public class FlightManagementApplication   {
 //			System.out.println("invalid");
 //		}
 //	}
-		
+	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(FlightManagementApplication.class, args);
 	}
-
 
 }

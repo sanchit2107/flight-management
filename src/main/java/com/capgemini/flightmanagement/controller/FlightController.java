@@ -73,5 +73,14 @@ public class FlightController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
+	
+	@GetMapping("/findByRoute/{arrivalAirport}/{departureAirport}/{date}")
+	public ResponseEntity<FlightDetails> findByRoute(
+			@PathVariable String arrivalAirport,
+			@PathVariable String departureAirport,
+			@PathVariable String date){
+		return flightService.findByRouteDate(arrivalAirport, departureAirport, date);
+	}
+	
 
 }

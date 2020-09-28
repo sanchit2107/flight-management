@@ -33,7 +33,7 @@ public class UserController {
 		if (error.hasErrors()) {
 			throw new UserValidationException("invalid data provided");
 		}
-
+//		user.setUserId(123);
 		return service.addUser(user);
 	}
 

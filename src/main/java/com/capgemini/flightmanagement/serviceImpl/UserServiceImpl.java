@@ -30,13 +30,14 @@ public class UserServiceImpl implements UserService {
 
 		if (user == null)
 			throw new NullUserException("No data recieved");
+		Integer userId = (int) ((Math.random() * 900) + 100);
+		user.setUserId(userId);
 		Optional<User> checkUser = dao.findById(user.getUserId());
 		if (checkUser.isPresent())
 			throw new UserAlreadyExistException("user already exists");
 		else {
 			
-//			Integer userId = (int) ((Math.random() * 900) + 100);
-//			user.setUserId(userId);
+			
 			dao.save(user);
 			UserAuth auth = new UserAuth(user.getUserId(), user.getPassword());
 			String token = jwt.generateToken(auth);

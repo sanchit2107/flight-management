@@ -3,9 +3,11 @@
  */
 package com.capgemini.flightmanagement.serviceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.flightmanagement.dao.FlightDetailsDao;
@@ -36,12 +38,14 @@ public class FlightDetailsServiceImpl implements FlightDetailsService {
 		
 		if (flight == null)
 			throw new NullFlightDetailsException("No data recieved");
+		int flightId = (int) ((Math.random() * 9000) + 1000);
+		flight.setFlightNumber(flightId);
+		
 		Optional<FlightDetails> findByFlightNumber = flightDao.findById(flight.getFlightNumber());		
 		if (findByFlightNumber.isPresent())
 			throw new FlightDetailsAlreadyPresentException("Flight Details already exists..");
 		else {
-//			int flightId = (int) ((Math.random() * 9000) + 1000);
-//			flight.setFlightNumber(flightId);
+			
 			flightDao.save(flight);
 		}
 		System.out.println("Flight Details Added..");
@@ -112,5 +116,14 @@ public class FlightDetailsServiceImpl implements FlightDetailsService {
 			throw new FlightDetailsNotFoundException("Flight Details not found");
 		flightDao.deleteById(flightNumber);
 	}
-
+	
+	public ResponseEntity<FlightDetails> findByRouteDate(String arrivalAirport,String departureAirport,String date) {
+		List<FlightDetails> list = flightDao.findByRouteDate(arrivalAirport.toLowerCase(), departureAirport.toLowerCase());
+		for (FlightDetails f : list) {
+			if(f.getDepartureDate().equals(date)) {
+				return ResponseEntity.ok().body(f);
+			}
+		}
+		throw new FlightDetailsNotFoundException("details not found");
+	}
 }
