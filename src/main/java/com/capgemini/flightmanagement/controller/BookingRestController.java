@@ -1,9 +1,6 @@
 package com.capgemini.flightmanagement.controller;
 
-import java.math.BigInteger;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -43,10 +40,7 @@ public class BookingRestController {
 
 	@PostMapping("/create/{userId}/{flightId}")
 	public void addBooking(@RequestBody BookingDetails newBooking, @PathVariable Integer userId,@PathVariable Integer flightId) {
-	     //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	     //LocalDate bookingDate = LocalDate.parse(BookingDetails.getBookingDate(), formatter);
-
-
+	   
 		bookingService.createBooking(newBooking,userId,flightId);
 	}
 
