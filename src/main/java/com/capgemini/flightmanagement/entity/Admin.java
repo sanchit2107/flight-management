@@ -9,7 +9,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "admins",schema = "hr")
+@Table(name = "admins",schema = "bootcampuser")
 public class Admin {
 
 	@Id
@@ -19,7 +19,6 @@ public class Admin {
 
 	public Admin() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Admin(Integer adminId, String password, String adminName) {

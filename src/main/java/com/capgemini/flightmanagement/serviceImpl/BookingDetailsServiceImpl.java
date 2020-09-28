@@ -1,7 +1,5 @@
 package com.capgemini.flightmanagement.serviceImpl;
 
-import java.math.BigInteger;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -10,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.capgemini.flightmanagement.dao.BookingDetailsDao;
-import com.capgemini.flightmanagement.dao.UserDao;
 import com.capgemini.flightmanagement.entity.BookingDetails;
-import com.capgemini.flightmanagement.exception.RecordAlreadyPresentException;
 import com.capgemini.flightmanagement.exception.RecordNotFoundException;
 import com.capgemini.flightmanagement.service.BookingDetailsService;
 import com.capgemini.flightmanagement.entity.*;

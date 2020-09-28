@@ -1,11 +1,5 @@
 package com.capgemini.flightmanagement.entity;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,7 +10,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-@Table(name = "flight_details", schema = "hr")
+@Table(name = "flight_details", schema = "bootcampuser")
 public class FlightDetails {
 
 	@Id
@@ -49,7 +43,6 @@ public class FlightDetails {
 
 	public FlightDetails() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public FlightDetails(Integer flightNumber,
