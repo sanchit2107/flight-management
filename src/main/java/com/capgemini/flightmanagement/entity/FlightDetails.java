@@ -1,6 +1,10 @@
 package com.capgemini.flightmanagement.entity;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,17 +21,30 @@ public class FlightDetails {
 
 	@Id
 	private Integer flightNumber;
+
 	@NotNull(message = "Departure Airport cannot be null")
 	private String departureAirport;
+
 	@NotNull(message = "Source Airport cannot be null")
 	private String arrivalAirport;
+
 	private Integer availableSeats;
-//	@NotNull(message = "Arival Time cannot be null")
-	private LocalDateTime arrivalTime;
-//	@NotNull(message = "Departure Time cannot be null")
-	private LocalDateTime departureTime;
+
+	@NotNull(message = "daparture date cannot be null")
+	private String departureDate;
+
+	@NotNull(message = "arrival date cannot b null")
+	private String arrivalDate;
+
+	@NotNull(message = "Arival Time cannot be null")
+	private String arrivalTime;
+
+	@NotNull(message = "Departure Time cannot be null")
+	private String departureTime;
+
 	@NotNull(message = "Flight Vendor cannot be null")
 	private String flightVendor;
+
 	private Double cost;
 
 	public FlightDetails() {
@@ -35,20 +52,58 @@ public class FlightDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FlightDetails(Integer flightNumber, String departureAirport, String arrivalAirport, Integer availableSeats,
-			LocalDateTime arrivalTime, LocalDateTime departureTime, String flightVendor,Double cost) {
+	public FlightDetails(Integer flightNumber,
+			@NotNull(message = "Departure Airport cannot be null") String departureAirport,
+			@NotNull(message = "Source Airport cannot be null") String arrivalAirport, Integer availableSeats,
+			@NotNull(message = "daparture date cannot be null") String departureDate,
+			@NotNull(message = "arrival date cannot b null") String arrivalDate,
+			@NotNull(message = "Arival Time cannot be null") String arrivalTime,
+			@NotNull(message = "Departure Time cannot be null") String departureTime,
+			@NotNull(message = "Flight Vendor cannot be null") String flightVendor, Double cost) {
 		super();
 		this.flightNumber = flightNumber;
 		this.departureAirport = departureAirport;
 		this.arrivalAirport = arrivalAirport;
 		this.availableSeats = availableSeats;
+		this.departureDate = departureDate;
+		this.arrivalDate = arrivalDate;
 		this.arrivalTime = arrivalTime;
 		this.departureTime = departureTime;
 		this.flightVendor = flightVendor;
 		this.cost = cost;
 	}
-	
-	
+
+	public String getDepartureDate() {
+		return departureDate;
+	}
+
+	public void setDepartureDate(String departureDate) {
+		this.departureDate = departureDate;
+	}
+
+	public String getArrivalDate() {
+		return arrivalDate;
+	}
+
+	public void setArrivalDate(String arrivalDate) {
+		this.arrivalDate = arrivalDate;
+	}
+
+	public String getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(String arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public String getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(String departureTime) {
+		this.departureTime = departureTime;
+	}
 
 	public Double getCost() {
 		return cost;
@@ -71,7 +126,7 @@ public class FlightDetails {
 	}
 
 	public void setDepartureAirport(String departureAirport) {
-		this.departureAirport = departureAirport;
+		this.departureAirport = departureAirport.toLowerCase();
 	}
 
 	public String getArrivalAirport() {
@@ -79,7 +134,7 @@ public class FlightDetails {
 	}
 
 	public void setArrivalAirport(String arrivalAirport) {
-		this.arrivalAirport = arrivalAirport;
+		this.arrivalAirport = arrivalAirport.toLowerCase();
 	}
 
 	public Integer getAvailableSeats() {
@@ -88,22 +143,6 @@ public class FlightDetails {
 
 	public void setAvailableSeats(Integer availableSeats) {
 		this.availableSeats = availableSeats;
-	}
-
-	public LocalDateTime getArrivalTime() {
-		return arrivalTime;
-	}
-
-	public void setArrivalTime(LocalDateTime arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
-
-	public LocalDateTime getDepartureTime() {
-		return departureTime;
-	}
-
-	public void setDepartureTime(LocalDateTime departureTime) {
-		this.departureTime = departureTime;
 	}
 
 	public String getFlightVendor() {

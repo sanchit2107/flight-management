@@ -3,9 +3,11 @@
  */
 package com.capgemini.flightmanagement.serviceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.flightmanagement.dao.FlightDetailsDao;
@@ -114,5 +116,14 @@ public class FlightDetailsServiceImpl implements FlightDetailsService {
 			throw new FlightDetailsNotFoundException("Flight Details not found");
 		flightDao.deleteById(flightNumber);
 	}
-
+	
+	public ResponseEntity<FlightDetails> findByRouteDate(String arrivalAirport,String departureAirport,String date) {
+		List<FlightDetails> list = flightDao.findByRouteDate(arrivalAirport.toLowerCase(), departureAirport.toLowerCase());
+		for (FlightDetails f : list) {
+			if(f.getDepartureDate().equals(date)) {
+				return ResponseEntity.ok().body(f);
+			}
+		}
+		throw new FlightDetailsNotFoundException("details not found");
+	}
 }
