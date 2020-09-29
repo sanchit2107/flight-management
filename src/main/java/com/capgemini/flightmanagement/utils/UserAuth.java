@@ -1,3 +1,4 @@
+
 package com.capgemini.flightmanagement.utils;
 
 import org.springframework.stereotype.Component;
@@ -5,27 +6,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserAuth {
 
-	private int userId;
+	private Integer userId;
 	private String password;
-
-	
-
-	public UserAuth(int userId, String password) {
-		super();
-		this.userId = userId;
-		this.password = password;
-	}
 
 	public UserAuth() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getUserId() {
+	public UserAuth(Integer userId, String password) {
+		super();
+		this.userId = userId;
+		this.password = password;
+	}
+
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -36,7 +35,5 @@ public class UserAuth {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	
 
 }

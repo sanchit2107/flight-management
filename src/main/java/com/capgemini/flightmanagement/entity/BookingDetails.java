@@ -26,9 +26,7 @@ public class BookingDetails {
 	private LocalDateTime bookingTime;
 	private Double totalCost;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "flightdetails_id")
-	private FlightDetails flightDetails;
+	private Integer flightNumber;
 	
 	
 	private Integer ownerId;
@@ -41,13 +39,13 @@ public class BookingDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BookingDetails(Integer bookingId, LocalDateTime bookingTime, Double totalCost, FlightDetails flightDetails,
+	public BookingDetails(Integer bookingId, LocalDateTime bookingTime, Double totalCost, Integer flightNumber,
 			Integer ownerId) {
 		super();
 		this.bookingId = bookingId;
 		this.bookingTime = bookingTime;
 		this.totalCost = totalCost;
-		this.flightDetails = flightDetails;
+		this.flightNumber = flightNumber;
 		this.ownerId = ownerId;
 	}
 
@@ -75,12 +73,12 @@ public class BookingDetails {
 		this.totalCost = totalCost;
 	}
 
-	public FlightDetails getFlightDetails() {
-		return flightDetails;
+	public Integer getFlightNumber() {
+		return flightNumber;
 	}
 
-	public void setFlightDetails(FlightDetails flightDetails) {
-		this.flightDetails = flightDetails;
+	public void setFlightDetails(Integer flightNumber) {
+		this.flightNumber = flightNumber;
 	}
 	
 

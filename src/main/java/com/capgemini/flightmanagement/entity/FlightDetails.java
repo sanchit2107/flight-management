@@ -39,6 +39,7 @@ public class FlightDetails {
 	@NotNull(message = "Flight Vendor cannot be null")
 	private String flightVendor;
 
+	@NotNull(message = "cost cannot be null")
 	private Double cost;
 
 	public FlightDetails() {

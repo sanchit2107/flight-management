@@ -1,21 +1,26 @@
 package com.capgemini.flightmanagement.service;
 
-
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import com.capgemini.flightmanagement.entity.Admin;
+import com.capgemini.flightmanagement.entity.FlightDetails;
 import com.capgemini.flightmanagement.utils.AdminAuth;
 
-
-@Service
 public interface AdminService {
-
-	public String addAdmin(Admin admin);
+	public Admin addAdmin(Admin admin);
 
 	public Admin getAdmin(Integer adminId);
 
 	public void deleteAdmin(Integer adminId);
 
-	public String adminLogin(AdminAuth auth);
+	public Admin adminLogin(AdminAuth auth);
+
+	public List<FlightDetails> getAllFlightDetails();
+
+	public FlightDetails addFlightDetails(FlightDetails details);
+
+	public void deleteFlight(Integer flightNumber);
+
+	public FlightDetails updateFlight(FlightDetails details);
 
 }
