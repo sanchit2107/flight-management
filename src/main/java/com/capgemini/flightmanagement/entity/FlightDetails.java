@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-@Table(name = "flight_details", schema = "bootcampuser")
+@Table(name = "flight_details", schema = "hr")
 public class FlightDetails {
 
 	@Id

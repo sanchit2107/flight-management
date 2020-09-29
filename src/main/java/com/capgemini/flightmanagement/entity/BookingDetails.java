@@ -18,7 +18,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "booking_details",schema = "bootcampuser")
+@Table(name = "booking_details",schema = "hr")
 public class BookingDetails {
 
 	@Id
