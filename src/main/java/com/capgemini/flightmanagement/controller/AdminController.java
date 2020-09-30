@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.flightmanagement.entity.Admin;
 import com.capgemini.flightmanagement.entity.FlightDetails;
+import com.capgemini.flightmanagement.entity.Passenger;
 import com.capgemini.flightmanagement.serviceImpl.AdminServiceImpl;
 import com.capgemini.flightmanagement.utils.AdminAuth;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -72,6 +75,18 @@ public class AdminController {
 	public ResponseEntity<FlightDetails> updateFlight(@RequestBody FlightDetails flightDetails){
 		FlightDetails details = service.updateFlight(flightDetails);
 		return ResponseEntity.ok().body(details);
+	}
+	
+	@GetMapping("/getAllPassengers")
+	public ResponseEntity<List<Passenger>> getAllPassengers(){
+		List<Passenger> passengers = service.getAllPassengers();
+		return ResponseEntity.ok().body(passengers);
+	}
+	
+	@GetMapping("/getPassengerByBooking/{id}")
+	public ResponseEntity<List<Passenger>> getPassengerByBooking(@PathVariable Integer id){
+		List<Passenger> passengers = service.getPassengersByBooking(id);
+		return ResponseEntity.ok().body(passengers);
 	}
 		
 }

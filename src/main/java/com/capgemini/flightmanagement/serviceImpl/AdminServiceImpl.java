@@ -7,14 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.flightmanagement.dao.AdminDao;
+import com.capgemini.flightmanagement.dao.BookingDetailsDao;
 import com.capgemini.flightmanagement.dao.FlightDetailsDao;
+import com.capgemini.flightmanagement.dao.PassengerDao;
 import com.capgemini.flightmanagement.entity.Admin;
+import com.capgemini.flightmanagement.entity.BookingDetails;
 import com.capgemini.flightmanagement.entity.FlightDetails;
+import com.capgemini.flightmanagement.entity.Passenger;
 import com.capgemini.flightmanagement.exception.AdminAlreadyExistException;
 import com.capgemini.flightmanagement.exception.AdminDoesnotExistException;
+import com.capgemini.flightmanagement.exception.BookingDoesNotFoundException;
 import com.capgemini.flightmanagement.exception.FlightDetailsNotFoundException;
 import com.capgemini.flightmanagement.exception.NullAdminException;
 import com.capgemini.flightmanagement.exception.NullFlightDetailsException;
+import com.capgemini.flightmanagement.exception.NullUserException;
+import com.capgemini.flightmanagement.exception.UserDoesnotExistException;
 import com.capgemini.flightmanagement.service.AdminService;
 import com.capgemini.flightmanagement.utils.AdminAuth;
 
@@ -27,6 +34,12 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	FlightDetailsDao flightDao;
+	
+	@Autowired
+	PassengerDao passengerDao;
+	
+	@Autowired
+	BookingDetailsDao bookingDao;
 
 	
 	@Override
@@ -121,6 +134,18 @@ public class AdminServiceImpl implements AdminService {
 		}
 		flightDao.save(details);
 		return details;
+	}
+	
+	public List<Passenger> getAllPassengers(){
+		return passengerDao.findAll();
+	}
+	
+	public List<Passenger> getPassengersByBooking(Integer id){
+		if (id == null) throw new BookingDoesNotFoundException("no data provided");
+		Optional<BookingDetails> details = bookingDao.findById(id);
+		if (!details.isPresent())
+			throw new BookingDoesNotFoundException("booking not found");
+		return details.get().getPassengers();
 	}
 
 }

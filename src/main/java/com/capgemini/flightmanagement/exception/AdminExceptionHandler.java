@@ -22,4 +22,9 @@ public class AdminExceptionHandler {
 	public ResponseEntity<ExceptionObject> handleAdminDoesnotExistException(AdminDoesnotExistException e){
 		return new ResponseEntity<ExceptionObject>(new ExceptionObject(e.getMessage(),HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(value = {BookingDoesNotFoundException.class})
+	public ResponseEntity<ExceptionObject> handleBookingException(BookingDoesNotFoundException e){
+		return new ResponseEntity<ExceptionObject>(new ExceptionObject(e.getMessage(),HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
+	}
 }

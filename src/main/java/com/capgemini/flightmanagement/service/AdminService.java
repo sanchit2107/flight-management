@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.capgemini.flightmanagement.entity.Admin;
 import com.capgemini.flightmanagement.entity.FlightDetails;
+import com.capgemini.flightmanagement.entity.Passenger;
 import com.capgemini.flightmanagement.utils.AdminAuth;
 
 public interface AdminService {
@@ -22,5 +23,9 @@ public interface AdminService {
 	public void deleteFlight(Integer flightNumber);
 
 	public FlightDetails updateFlight(FlightDetails details);
+	
+	public List<Passenger> getAllPassengers();
+	
+	public List<Passenger> getPassengersByBooking(Integer id);
 
 }
