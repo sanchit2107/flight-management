@@ -1,6 +1,8 @@
 package com.capgemini.flightmanagement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.stream.Collectors;
@@ -15,6 +17,11 @@ import com.capgemini.flightmanagement.dao.FlightDetailsDao;
 import com.capgemini.flightmanagement.entity.FlightDetails;
 import com.capgemini.flightmanagement.service.AdminService;
 
+/*
+ * @author Sanchit Singhal
+ * Mockito Test Cases for FlightDetails
+ */
+
 @SpringBootTest
 public class AddFlightDetailsTest {
 
@@ -25,6 +32,9 @@ public class AddFlightDetailsTest {
 	@MockBean
 	private FlightDetailsDao repository;
 	
+	/*
+	 * Testing getAllFlightDetails()
+	 */
 	@Test
 	public void testGetFlightDetails() {
 		when(repository.findAll()).thenReturn(Stream
@@ -33,6 +43,10 @@ public class AddFlightDetailsTest {
 		assertEquals(1, flightService.getAllFlightDetails().size());
 	}
 	
+	
+	/*
+	 * Testing getAllFlightDetails() method
+	 */
 	@Test
 	public void testDisplayAllFlightDetails() {
 		when(repository.findAll()).thenReturn(Stream
@@ -41,5 +55,31 @@ public class AddFlightDetailsTest {
 						new FlightDetails("bangalore", "kolkatta", 48, "02-12-2020", "03-12-2020", 
 								"05:20", "23:05", "spiceJet", 12899.00)).collect(Collectors.toList()));
 		assertEquals(2, flightService.getAllFlightDetails().size());
+	}
+	
+	
+	/*
+	 * Testing addFlightDetails() method
+	 */
+	@Test
+	public void testAddFlightDetails() {
+		
+		FlightDetails flightObj = new FlightDetails("pune", "delhi", 56, "25-12-2020", "26-12-2020", 
+				"05:00", "23:55", "indianAirways", 9899.55);
+		when(repository.save(flightObj)).thenReturn(flightObj);
+		assertEquals(flightObj, flightService.addFlightDetails(flightObj));
+	}
+	
+	
+	/*
+	 * Testing 
+	 */
+	@Test
+	public void testDeleteFlightDetails() {
+		
+		FlightDetails flightObj = new FlightDetails("pune", "delhi", 56, "25-12-2020", "26-12-2020", 
+				"05:00", "23:55", "indianAirways", 9899.55);
+		flightService.deleteFlight(flightObj.getFlightNumber());
+		verify(repository, times(1)).deleteById(flightObj.getFlightNumber());
 	}
 }
