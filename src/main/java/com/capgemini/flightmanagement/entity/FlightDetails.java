@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-@Table(name = "flight_details", schema = "hr")
+@Table(name = "flight_details", schema = "bootcampuser")
 public class FlightDetails {
 
 	@Id
@@ -46,7 +46,7 @@ public class FlightDetails {
 		super();
 	}
 
-	public FlightDetails(Integer flightNumber,
+	public FlightDetails(
 			@NotNull(message = "Departure Airport cannot be null") String departureAirport,
 			@NotNull(message = "Source Airport cannot be null") String arrivalAirport, Integer availableSeats,
 			@NotNull(message = "daparture date cannot be null") String departureDate,
@@ -55,7 +55,6 @@ public class FlightDetails {
 			@NotNull(message = "Departure Time cannot be null") String departureTime,
 			@NotNull(message = "Flight Vendor cannot be null") String flightVendor, Double cost) {
 		super();
-		this.flightNumber = flightNumber;
 		this.departureAirport = departureAirport;
 		this.arrivalAirport = arrivalAirport;
 		this.availableSeats = availableSeats;
