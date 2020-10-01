@@ -69,17 +69,4 @@ public class AddFlightDetailsTest {
 		when(repository.save(flightObj)).thenReturn(flightObj);
 		assertEquals(flightObj, flightService.addFlightDetails(flightObj));
 	}
-	
-	
-	/*
-	 * Testing 
-	 */
-	@Test
-	public void testDeleteFlightDetails() {
-		
-		FlightDetails flightObj = new FlightDetails("pune", "delhi", 56, "25-12-2020", "26-12-2020", 
-				"05:00", "23:55", "indianAirways", 9899.55);
-		flightService.deleteFlight(flightObj.getFlightNumber());
-		verify(repository, times(1)).deleteById(flightObj.getFlightNumber());
-	}
 }
