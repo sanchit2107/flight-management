@@ -23,22 +23,19 @@ public class Passenger {
 	private Integer age;
 	private Double luggage;
 	
-	@ManyToOne
-	@JoinColumn(name = "booking_id")
-	private BookingDetails bookingDetails;
+	
 
 	public Passenger() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Passenger(Integer passengerId, String name, Integer age, Double luggage, BookingDetails bookingDetails) {
+	public Passenger(Integer passengerId, String name, Integer age, Double luggage) {
 		super();
 		this.passengerId = passengerId;
 		this.name = name;
 		this.age = age;
 		this.luggage = luggage;
-		this.bookingDetails = bookingDetails;
 	}
 
 	public Integer getPassengerId() {
@@ -73,14 +70,5 @@ public class Passenger {
 		this.luggage = luggage;
 	}
 
-	public BookingDetails getBookingDetails() {
-		return bookingDetails;
-	}
-
-	public void setBookingDetails(BookingDetails bookingDetails) {
-		this.bookingDetails = bookingDetails;
-	}
-	
-	
 
 }

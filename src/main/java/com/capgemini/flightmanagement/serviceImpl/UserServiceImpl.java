@@ -1,5 +1,7 @@
 package com.capgemini.flightmanagement.serviceImpl;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -116,13 +118,15 @@ public class UserServiceImpl implements UserSevice{
 		Integer bookingId = (int) ((Math.random() * 9000) + 1000);
 		booking.setBookingId(bookingId);
 		booking.setOwnerId(userId);
-		booking.setFlightDetails(flightNumber);
+		booking.setFlightNumber(flightNumber);
+		booking.setBookingDate(LocalDate.now().toString());
+		booking.setBookingTime(LocalTime.now().toString().substring(0, 5));
 		booking.setTotalCost(flight.get().getCost() * booking.getPassengers().size());
 		List<BookingDetails> bookingList = user.get().getBookingDetails();
 		bookingList.add(booking);
 		user.get().setBookingDetails(bookingList);
 		updateUser(user.get());
-		return booking;
+		return bookingDao.getOne(bookingId);
 	}
 
 	@Override

@@ -23,7 +23,11 @@ public class BookingDetails {
 
 	@Id
 	private Integer bookingId;
-	private LocalDateTime bookingTime;
+	
+	private String bookingDate;
+	
+	private String bookingTime;
+	
 	private Double totalCost;
 	
 	private Integer flightNumber;
@@ -31,7 +35,7 @@ public class BookingDetails {
 	
 	private Integer ownerId;
 	
-	@OneToMany(mappedBy = "bookingDetails",cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Passenger> passengers = new ArrayList<Passenger>();
 
 	public BookingDetails() {
@@ -39,15 +43,20 @@ public class BookingDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BookingDetails(Integer bookingId, LocalDateTime bookingTime, Double totalCost, Integer flightNumber,
-			Integer ownerId) {
+	
+
+	public BookingDetails(Integer bookingId, String bookingDate, String bookingTime, Double totalCost,
+			Integer flightNumber, Integer ownerId) {
 		super();
 		this.bookingId = bookingId;
+		this.bookingDate = bookingDate;
 		this.bookingTime = bookingTime;
 		this.totalCost = totalCost;
 		this.flightNumber = flightNumber;
 		this.ownerId = ownerId;
 	}
+
+
 
 	public Integer getBookingId() {
 		return bookingId;
@@ -57,11 +66,27 @@ public class BookingDetails {
 		this.bookingId = bookingId;
 	}
 
-	public LocalDateTime getBookingTime() {
+	
+
+	public String getBookingDate() {
+		return bookingDate;
+	}
+
+
+
+	public void setBookingDate(String bookingDate) {
+		this.bookingDate = bookingDate;
+	}
+
+
+
+	public String getBookingTime() {
 		return bookingTime;
 	}
 
-	public void setBookingTime(LocalDateTime bookingTime) {
+
+
+	public void setBookingTime(String bookingTime) {
 		this.bookingTime = bookingTime;
 	}
 
@@ -77,7 +102,7 @@ public class BookingDetails {
 		return flightNumber;
 	}
 
-	public void setFlightDetails(Integer flightNumber) {
+	public void setFlightNumber(Integer flightNumber) {
 		this.flightNumber = flightNumber;
 	}
 	
