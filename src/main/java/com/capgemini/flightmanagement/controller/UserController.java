@@ -93,4 +93,10 @@ public class UserController {
 		List<BookingDetails> list = service.getBookingByUserId(userId);
 		return ResponseEntity.ok().body(list);
 	}
+	
+	@GetMapping("/getFlightByNumber/{flightNumber}")
+	public ResponseEntity<FlightDetails> getFlightByNumber(@PathVariable Integer flightNumber){
+		FlightDetails details = service.getFlightByFlightNumber(flightNumber);
+		return ResponseEntity.ok().body(details);
+	}
 }

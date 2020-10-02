@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.flightmanagement.dao.BookingDetailsDao;
@@ -16,6 +15,7 @@ import com.capgemini.flightmanagement.entity.BookingDetails;
 import com.capgemini.flightmanagement.entity.FlightDetails;
 import com.capgemini.flightmanagement.entity.User;
 import com.capgemini.flightmanagement.exception.FlightDetailsNotFoundException;
+import com.capgemini.flightmanagement.exception.NullFlightDetailsException;
 import com.capgemini.flightmanagement.exception.NullUserException;
 import com.capgemini.flightmanagement.exception.UserAlreadyExistException;
 import com.capgemini.flightmanagement.exception.UserDoesnotExistException;
@@ -173,6 +173,17 @@ public class UserServiceImpl implements UserSevice{
 			}
 		}
 		throw new FlightDetailsNotFoundException("details not found");
+	}
+	
+	public FlightDetails getFlightByFlightNumber(Integer flightNumber) {
+		if (flightNumber == null) {
+			throw new NullFlightDetailsException("no data privided");
+		}
+		Optional<FlightDetails> details = flightDao.findById(flightNumber);
+		if (!details.isPresent()) {
+			throw new FlightDetailsNotFoundException("no flight found for given number");
+		}
+		return details.get();
 	}
 
 }

@@ -30,12 +30,6 @@ public class AdminController {
 	
 	
 	
-	@PostMapping("/addAdmin")
-	public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin){
-		Admin addedAdmin = service.addAdmin(admin);
-		return ResponseEntity.ok(addedAdmin);
-	}
-	
 	@PostMapping("/adminLogin")
 	public ResponseEntity<Admin> loginAdmin(@RequestBody AdminAuth auth){
 		Admin admin = service.adminLogin(auth);
@@ -87,6 +81,12 @@ public class AdminController {
 	public ResponseEntity<List<Passenger>> getPassengerByBooking(@PathVariable Integer id){
 		List<Passenger> passengers = service.getPassengersByBooking(id);
 		return ResponseEntity.ok().body(passengers);
+	}
+	
+	@PostMapping("/addAdmin")
+	public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin){
+		Admin addedAdmin = service.addAdmin(admin);
+		return ResponseEntity.ok(addedAdmin);
 	}
 		
 }

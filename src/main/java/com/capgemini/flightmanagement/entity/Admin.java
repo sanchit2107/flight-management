@@ -9,7 +9,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "admins",schema = "bootcampuser")
+@Table(name = "admins",schema = "hr")
 public class Admin {
 
 	@Id
