@@ -30,6 +30,11 @@ public class UserExceptionHandler {
 		return new ResponseEntity<ExceptionObject>(new ExceptionObject(e.getMessage(), HttpStatus.BAD_REQUEST),HttpStatus.BAD_REQUEST);
 	}
 	
+	@ExceptionHandler(value = {PassengerNotFoundException.class})
+	public ResponseEntity<ExceptionObject> handlePassengerError(PassengerNotFoundException e){
+		return new ResponseEntity<ExceptionObject>(new ExceptionObject(e.getMessage(), HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
+	}
+	
 	
 	
 }

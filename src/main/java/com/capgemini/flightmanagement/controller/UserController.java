@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.flightmanagement.entity.BookingDetails;
 import com.capgemini.flightmanagement.entity.FlightDetails;
+import com.capgemini.flightmanagement.entity.Passenger;
 import com.capgemini.flightmanagement.entity.User;
 import com.capgemini.flightmanagement.exception.UserDoesnotExistException;
 import com.capgemini.flightmanagement.exception.UserValidationException;
@@ -98,5 +99,11 @@ public class UserController {
 	public ResponseEntity<FlightDetails> getFlightByNumber(@PathVariable Integer flightNumber){
 		FlightDetails details = service.getFlightByFlightNumber(flightNumber);
 		return ResponseEntity.ok().body(details);
+	}
+	
+	@PostMapping("/updatePassenger")
+	public ResponseEntity<Passenger> updatePassenger(@RequestBody Passenger passenger){
+		Passenger p = service.updatePassenger(passenger);
+		return ResponseEntity.ok().body(p);
 	}
 }

@@ -17,16 +17,16 @@ import com.capgemini.flightmanagement.serviceImpl.AdminServiceImpl;
 @SpringBootApplication
 public class FlightManagementApplication {
 	
-	@Autowired
-	AdminServiceImpl adminService;
-	
-	@PostConstruct
-	public void initAdmin() {
-		Admin admin = new Admin();
-		admin.setAdminName("tarun");
-		admin.setPassword("12345678");
-		adminService.addAdmin(admin);
-	}
+//	@Autowired
+//	AdminServiceImpl adminService;
+//	
+//	@PostConstruct
+//	public void initAdmin() {
+//		Admin admin = new Admin();
+//		admin.setAdminName("tarun");
+//		admin.setPassword("12345678");
+//		adminService.addAdmin(admin);
+//	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(FlightManagementApplication.class, args);

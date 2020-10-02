@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.capgemini.flightmanagement.entity.BookingDetails;
 import com.capgemini.flightmanagement.entity.FlightDetails;
+import com.capgemini.flightmanagement.entity.Passenger;
 import com.capgemini.flightmanagement.entity.User;
 
 import com.capgemini.flightmanagement.utils.UserAuth;
 
-public interface UserSevice {
+public interface UserService {
 	public User addUser(User user);
 
 	public void updateUser(User user);
@@ -26,5 +27,9 @@ public interface UserSevice {
 	public List<BookingDetails> getBookingByUserId(Integer userId);
 
 	public FlightDetails findByRouteAndDate(String arrivalAirport, String departureAirport, String date);
+	
+	public FlightDetails getFlightByFlightNumber(Integer flightNumber);
+	
+	public Passenger updatePassenger(Passenger passenger);
 
 }
